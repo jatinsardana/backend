@@ -1,0 +1,21 @@
+const express = require("express")
+
+const app = express();
+
+let a = 2;
+
+app.get("/health" , function(req,res){
+    const kidID = req.query.kidID;
+    const username = req.headers.username;
+    const password = req.headers.password;
+
+        if(password!="pass" || username!="jatin"){
+            res.status(403).json({
+                msg : "wrong input"
+            });
+            return;
+        }
+    res.send("hi there working fine")
+})
+
+app.listen(3000);
