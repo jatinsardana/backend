@@ -1,0 +1,21 @@
+const express = require("express");
+const app = express();
+const zod = require("zod");
+
+function validate(obj){
+    const schema = zod.object({
+        email :  zod.string().email(),
+        password : zod.string().min(8),
+        country : zod.literal("IN").or(zod.literal("US"))
+    })
+    const response = schema.safeParse(obj);
+    console.log(response)
+}
+
+validate({
+    email : "jatin@gmail.com",
+    password : "12345678",
+    country : "IN"
+})
+
+app.listen(3000)
